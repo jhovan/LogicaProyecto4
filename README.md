@@ -1,5 +1,5 @@
-# Proyecto3
-Proyecto 3 de la asignatura Lógica Computacional 
+# Proyecto4
+Proyecto 4 de la asignatura Lógica Computacional 
 
 
 Integrantes:
