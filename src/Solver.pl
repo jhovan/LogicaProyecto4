@@ -10,7 +10,7 @@
 
 % Elimina conjuncion, implicaciones y equivalencias para que 
 % la formula solo tenga negaciones y disyunciones
-% Hace uso de equivalencias logicas para eliminarlas
+% Hace uso de equivalencias logicas para eliminarlas de forma recursiva
 dnf(A,A) :- atom(A).
 dnf(neg A,neg C) :- dnf(A,C).
 dnf(A or B,C or D) :- dnf(A,C),dnf(B,D).
@@ -24,7 +24,10 @@ dnf(A iff B,C) :- dnf((A impl B) and (B impl A),C).
 dnfL([],[]).
 dnfL([F|Fs],[G|Gs]) :- dnf(F,G),dnfL(Fs,Gs).
 
-% Es verdadero si y solo si I y D, es decir D se deduce de I
+% Implementacion del calculo de secuentes
+% Es verdadero si y solo si  los secuentes I y D son válidos
+% es decir D se deduce de I
+% Asume que las formulas solo tienen negaciones y disyunciones
 sc(I,D) :- not(intersection(I,D,[])). % Hipotesis
 sc([(neg F)|I],D) :- sc_aux(I,[F|D]). % negacion izquierda
 sc(I,[(neg F)|D]) :- sc_aux([F|I],D). % negacion derecha
